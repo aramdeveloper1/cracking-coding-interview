@@ -145,3 +145,69 @@ def palindrome_permutation(s):
 # print(palindrome_permutation("Tact Coa"))  # Output: True
 # print('________________')  # Output: False
 # print(palindrome_permutation("ara aram khasrok"))  # Output: False
+
+def one_away(s1, s2):
+    print("abs(len(s1) - len(s2)) *",abs(len(s1) - len(s2)))
+    print("** len(s1) == len(s2) *",len(s1) == len(s2))
+    print("-- len(s1) + 1 == len(s2) *",len(s1) + 1 == len(s2))
+    print("++ len(s2) + 1 == len(s1) *",len(s2) + 1 == len(s1))
+    if abs(len(s1) - len(s2)) > 1:
+        return False
+
+    if len(s1) == len(s2):
+        return sum(1 for a, b in zip(s1, s2) if a != b) <= 1
+    elif len(s1) + 1 == len(s2):
+        return s1 == s2[:-1]
+    elif len(s2) + 1 == len(s1):  # Corrected condition
+        return s1[:-1] == s2
+    return False
+
+# print(one_away("pale", "ple"))  # Output: True
+# print(one_away("pale", "bake"))  # Output: False
+# print(one_away("pales", "pale")) # Output: True
+# print(one_away("pale", "bale")) # Output: True
+def string_compression(s):
+    compressed = []
+    count = 1
+    for i in range(1, len(s)):
+        if s[i] == s[i - 1]:
+            print("s[i] *",s[i],"s[i-1] *",s[i-1])
+            count += 1
+            print("count *",count)
+        else:
+            compressed.append(s[i - 1] + str(count))
+            print("compressed *",compressed)
+            count = 1
+    print("********* compressed ",compressed)
+    compressed.append(s[-1] + str(count))  # Append last character
+    compressed_string = ''.join(compressed)
+    return compressed_string if len(compressed_string) < len(s) else s
+
+# Example usage:
+# print(string_compression("aabcccccaaa"))  # Output: "a2b1c5a3"
+# print(string_compression("abcd"))  # Output: "abcd"
+# print(string_compression("aaabbbccc"))  # Output: "a3b3c3"
+
+
+def rotate_matrix(matrix):
+    n = len(matrix)
+    print("n *",n)
+    # Transpose
+    for i in range(n):
+        print("i *",i)
+        for j in range(i + 1, n):
+            print("j *",j)
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+            print("matrix *",matrix)
+    # Reverse each row
+    for i in range(n):
+        matrix[i].reverse()
+
+# Example usage:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+# rotate_matrix(matrix)
+# print(matrix)
